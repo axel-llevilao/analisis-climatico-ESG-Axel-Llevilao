@@ -40,21 +40,28 @@ Opciones en *Network access*:
 
 Documentación: https://code.claude.com/docs/en/cloud-environments#network-access
 
-### 2. Secreto de Google Drive
+### 2. Token de Google Drive
 
-En **Environment variables** (o *Network secrets*, si tu versión de la app lo ofrece):
+1. En tu laptop: `rclone config show gdrive` y copia todo lo que va después de `token = `
+   (empieza con `{"access_token"` y termina con `}`).
+2. En claude.ai/code: botón con ícono de nube y el nombre del entorno, en la fila sobre
+   la caja de mensajes → **Cloud** → pasa el mouse sobre el entorno → ícono de engranaje.
+3. En el cuadro **Environment variables** agrega una línea, con el JSON entre comillas simples:
 
 ```
-RCLONE_CONFIG_GDRIVE_TOKEN={"access_token":"...","token_type":"Bearer","refresh_token":"...","expiry":"..."}
+RCLONE_CONFIG_GDRIVE_TOKEN='{"access_token":"...","token_type":"Bearer","refresh_token":"...","expiry":"..."}'
 ```
 
-El valor es el `token` que muestra `rclone config show gdrive` en tu laptop
-(ver [`setup_local.md`](setup_local.md), paso 3). El hook agrega por su cuenta
-`TYPE=drive` y `SCOPE=drive.file`.
+4. Guarda y abre una sesión nueva.
+
+No uses la sección *Network secrets*: está pensada para claves fijas de API, y rclone
+necesita el token completo para renovarlo. Los valores de *Environment variables*
+los puede leer cualquiera que use el entorno; como el entorno es personal, solo tú.
+El hook agrega por su cuenta `TYPE=drive` y `SCOPE=drive.file`.
 
 Notas:
 - rclone renueva el token de acceso en cada sesión con el `refresh_token`. Si deja de
-  funcionar (por ejemplo, porque revocaste el acceso en tu cuenta Google), repite el paso 3.
+  funcionar (por ejemplo, porque revocaste el acceso en tu cuenta Google), repite estos pasos.
 - Para revocar el acceso en cualquier momento: cuenta Google → Seguridad →
   Conexiones con apps de terceros → rclone.
 
