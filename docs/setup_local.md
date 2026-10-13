@@ -11,6 +11,7 @@ sudo apt install libgdal-dev libproj-dev libgeos-dev libudunits2-dev libsqlite3-
 ## 1. Clonar y preparar el entorno
 
 ```bash
+cd ~/Documents/R
 git clone https://github.com/axel-llevilao/analisis-climatico-ESG-Axel-Llevilao.git
 cd analisis-climatico-ESG-Axel-Llevilao
 make setup-py      # crea .venv con uv (versiones fijadas en uv.lock)
@@ -55,9 +56,11 @@ entorno del entorno en la nube. Instrucciones en [`setup_nube.md`](setup_nube.md
 
 ## 4. Abrir en Positron
 
-1. *File → Open Folder…* y elige la carpeta del repo.
-2. Intérprete de Python: elige `.venv` (Positron lo detecta solo).
-3. R: renv se activa solo al abrir la consola (vía `.Rprofile`).
+1. *File → Open Folder…* y elige `~/Documents/R/analisis-climatico-ESG-Axel-Llevilao`.
+   Ábrelo siempre así: la consola arranca en la carpeta del proyecto y renv se activa
+   solo (vía `.Rprofile`).
+2. Arranca R. Python no arranca solo (`.vscode/settings.json`); cuando lo necesites,
+   elige el intérprete `.venv` en el selector de intérpretes, arriba a la derecha.
 4. Prueba en la consola R:
 
 ```r
