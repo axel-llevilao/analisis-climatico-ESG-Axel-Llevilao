@@ -50,7 +50,20 @@ cc_ruta <- function(ruta) {
   file.path(cc_data_dir(), ruta)
 }
 
+# Activa la librería renv del proyecto si la sesión de R no la está usando
+# (p. ej., cuando Positron tiene abierta otra carpeta y se usó setwd()).
+cc_activar_renv <- function(raiz = cc_raiz()) {
+  activo <- Sys.getenv("RENV_PROJECT", unset = "")
+  if (file.exists(file.path(raiz, "renv", "activate.R")) &&
+      !identical(normalizePath(activo, mustWork = FALSE), normalizePath(raiz)) &&
+      requireNamespace("renv", quietly = TRUE)) {
+    renv::load(raiz, quiet = TRUE)
+  }
+  invisible(raiz)
+}
+
 cc_conectar <- function(memoria_max = "6GB") {
+  cc_activar_renv()
   if (!requireNamespace("duckdb", quietly = TRUE)) {
     stop("Falta el paquete duckdb. Ejecuta `make setup-r` (instala con renv).")
   }
