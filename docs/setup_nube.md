@@ -46,7 +46,15 @@ Documentación: https://code.claude.com/docs/en/cloud-environments#network-acces
 RCLONE_CONFIG_GDRIVE_TOKEN='{"access_token":"...","token_type":"Bearer","refresh_token":"...","expiry":"..."}'
 ```
 
-4. Guarda y abre una sesión nueva.
+4. Si usas un client_id propio (obligatorio desde 2026, ver `setup_local.md` paso 2b),
+   agrega también:
+
+```
+RCLONE_CONFIG_GDRIVE_CLIENT_ID=...
+RCLONE_CONFIG_GDRIVE_CLIENT_SECRET=...
+```
+
+5. Guarda y abre una sesión nueva.
 
 No uses la sección *Network secrets*: está pensada para claves fijas de API, y rclone
 necesita el token completo para renovarlo. Los valores de *Environment variables*

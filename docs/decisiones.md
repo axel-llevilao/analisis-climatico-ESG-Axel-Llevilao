@@ -122,6 +122,19 @@ nube y, en el laptop, `terra` por falta de PROJ/GDAL en el sistema.
 
 ---
 
+## D-008 · Client ID propio de Google para rclone
+**Fecha:** 2026-10-13 · **Estado:** aprobada (pendiente de ejecución por el usuario)
+
+**Contexto.** rclone avisa que su client_id compartido de Google Drive se retira durante
+2026 ([docs](https://rclone.org/drive/#making-your-own-client-id)). Con `drive.file`,
+los archivos solo son visibles para el client_id que los creó.
+
+**Decisión.** Crear un client_id propio (proyecto en Google Cloud, Desktop app,
+scope `drive.file`, app publicada) **antes** de subir datos reales. El único archivo
+creado con el client_id compartido es el de prueba: se borra y se vuelve a subir.
+
+---
+
 ## Pendientes (se decidirán más adelante)
 
 - Caso piloto: A) calor extremo y población mayor (recomendado), B) estrés hídrico
