@@ -3,7 +3,8 @@
 Las sesiones corren en contenedores Ubuntu 24.04 **efímeros**. Al abrir una sesión,
 `.claude/hooks/session-start.sh` deja el entorno listo:
 
-1. instala rclone y R desde el archivo de Ubuntu si faltan;
+1. instala rclone, R 4.5.3 (repositorio de CRAN para Ubuntu, misma versión que
+   `renv.lock`) y las librerías de sistema de sf/terra;
 2. instala Quarto (fijado en 1.6.40) desde GitHub Releases;
 3. crea el entorno Python con `uv sync`;
 4. instala paquetes R con renv, **si la red lo permite**;
@@ -19,17 +20,10 @@ Las sesiones nuevas toman los cambios.
 
 ### 1. Acceso a red
 
-Estado verificado el 2026-10-13 con la política actual:
-
-| Host | Para qué | Estado |
-|---|---|---|
-| pypi.org, files.pythonhosted.org | paquetes Python | permitido |
-| archive.ubuntu.com | R base, rclone | permitido |
-| github.com (releases) | Quarto | permitido |
-| www.googleapis.com, oauth2.googleapis.com | Google Drive | permitido |
-| cloud.r-project.org, packagemanager.posit.co | paquetes R | **bloqueado** |
-| *.gob.cl, *.cl (INE, datos.gob.cl, etc.) | fuentes de datos chilenas | **bloqueado** |
-| rclone.org, zenodo.org | documentación, publicación | **bloqueado** |
+Estado verificado el 2026-10-13, después de ampliar el acceso: pypi, CRAN, Posit Package
+Manager, GitHub Releases, Google Drive y los sitios `.gob.cl` (INE, datos.gob.cl)
+responden. Si alguna vez vuelves a un acceso limitado, el script de arranque avisará
+lo que no pudo instalar.
 
 Opciones en *Network access*:
 - **Acceso completo** (recomendado para este proyecto, que consulta decenas de portales públicos).

@@ -1,9 +1,11 @@
 # Puesta en marcha en el laptop (Debian 13 + Positron)
 
-Requisitos ya instalados: git, R, rclone, Quarto. Falta `uv` si no lo tienes:
+Requisitos ya instalados: git, R 4.5, rclone, Quarto y uv.
+
+Librerías de sistema que necesitan los paquetes espaciales de R (`sf`, `terra`, `units`):
 
 ```bash
-curl -LsSf https://astral.sh/uv/install.sh | sh
+sudo apt install libgdal-dev libproj-dev libgeos-dev libudunits2-dev libsqlite3-dev
 ```
 
 ## 1. Clonar y preparar el entorno
@@ -15,9 +17,9 @@ make setup-py      # crea .venv con uv (versiones fijadas en uv.lock)
 make setup-r       # instala paquetes R con renv
 ```
 
-La **primera vez**, `make setup-r` crea `renv.lock`. Commitéalo y súbelo
-(`git add renv.lock renv/activate.R .Rprofile && git commit -m "build: renv.lock" && git push`).
-Así quedan fijadas las mismas versiones de R en el laptop y en la nube.
+`make setup-r` instala exactamente las versiones fijadas en `renv.lock` (R 4.5,
+binarios precompilados de Posit Package Manager). Los paquetes se declaran en
+`DESCRIPTION`; para agregar uno, añádelo ahí y corre `make r-actualizar`.
 
 ## 2. Conectar Google Drive (una sola vez)
 

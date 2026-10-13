@@ -106,6 +106,22 @@ dependen de que se amplíe la política de red del entorno (ver `docs/setup_nube
 
 ---
 
+## D-007 · R 4.5 fijado en ambos lados y dependencias R explícitas
+**Fecha:** 2026-10-13 · **Estado:** aprobada
+
+**Contexto.** El laptop usa R 4.5 (Debian 13). Ubuntu 24.04 en la nube solo trae R 4.3,
+sin los paquetes recomendados (`Matrix`). En el primer intento falló `survival` en la
+nube y, en el laptop, `terra` por falta de PROJ/GDAL en el sistema.
+
+**Decisión.**
+- La nube instala R 4.5.3 desde el repositorio oficial de CRAN para Ubuntu.
+- Los paquetes R se declaran en `DESCRIPTION`. renv usa el snapshot tipo `explicit`
+  y `renv.lock` fija 92 paquetes.
+- `R/setup.R` verifica las librerías de sistema y, si faltan, indica el `apt install`
+  exacto antes de instalar nada.
+
+---
+
 ## Pendientes (se decidirán más adelante)
 
 - Caso piloto: A) calor extremo y población mayor (recomendado), B) estrés hídrico

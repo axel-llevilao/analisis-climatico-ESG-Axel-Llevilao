@@ -11,14 +11,30 @@ cd "${CLAUDE_PROJECT_DIR:-$(dirname "$0")/../..}"
 avisos=()
 alcanza() { curl -sS -o /dev/null -m 10 "$1" 2>/dev/null; }
 
-# 1. Herramientas de sistema (desde el archivo de Ubuntu, permitido por defecto).
+# 1. Herramientas de sistema.
+# R se fija en la misma versión menor que renv.lock (4.5), desde el repositorio de CRAN
+# para Ubuntu; el archivo de Ubuntu 24.04 solo trae R 4.3.
+R_APT_VERSION=4.5.3-1.2404.0
+if [ ! -f /etc/apt/sources.list.d/cran.list ] && alcanza https://cloud.r-project.org; then
+  curl -fsSL https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc \
+    -o /etc/apt/keyrings/cran.asc &&
+  echo "deb [signed-by=/etc/apt/keyrings/cran.asc] https://cloud.r-project.org/bin/linux/ubuntu noble-cran40/" \
+    >/etc/apt/sources.list.d/cran.list
+fi
 faltan=()
 command -v rclone >/dev/null || faltan+=(rclone)
-command -v Rscript >/dev/null || faltan+=(r-base-core r-cran-dbi)
+if [ "$(dpkg-query -W -f='${Version}' r-base-core 2>/dev/null)" != "$R_APT_VERSION" ]; then
+  faltan+=("r-base-core=$R_APT_VERSION" "r-recommended=$R_APT_VERSION")
+fi
+# Librerías de sistema para sf/terra/units.
+for p in libgdal-dev libproj-dev libgeos-dev libudunits2-dev libsqlite3-dev; do
+  dpkg -s "$p" >/dev/null 2>&1 || faltan+=("$p")
+done
 if [ ${#faltan[@]} -gt 0 ]; then
   echo "Instalando: ${faltan[*]}"
   if ! (apt-get update -qq && DEBIAN_FRONTEND=noninteractive \
-        apt-get install -y -qq --no-install-recommends "${faltan[@]}") >/dev/null 2>&1; then
+        apt-get install -y -qq --no-install-recommends --allow-downgrades "${faltan[@]}") \
+        >/dev/null 2>&1; then
     avisos+=("no se pudo instalar ${faltan[*]} con apt")
   fi
 fi
