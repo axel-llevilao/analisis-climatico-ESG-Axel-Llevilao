@@ -1,0 +1,19 @@
+---
+title: "Título del análisis"
+author: "Axel Llevilao"
+date: today
+format: html
+---
+
+```{r}
+#| label: setup
+source(file.path(rprojroot::find_root("pyproject.toml"), "R", "climachile.R"))
+con <- cc_conectar()
+# cc_vista(con, "panel", "marts/panel_comunal")
+```
+
+## Pregunta
+
+## Datos
+
+## Resultados
