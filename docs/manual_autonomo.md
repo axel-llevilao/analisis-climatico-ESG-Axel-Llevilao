@@ -1,4 +1,4 @@
-# Manual para operar el proyecto sin Claude
+# Manual de operación: con y sin Claude
 
 El proyecto **no depende de Claude para funcionar**. Todo vive en tres lugares que son tuyos:
 
@@ -8,14 +8,29 @@ El proyecto **no depende de Claude para funcionar**. Todo vive en tres lugares q
 | Datos | Google Drive, carpeta `climachile-data/` | Tu cuenta Google + la app `climachile-rclone` |
 | Entorno de trabajo | Tu laptop: Positron, R + renv, Python + uv, rclone, Quarto | Nada externo; las versiones están fijadas en `renv.lock` y `uv.lock` |
 
-Lo único que se pierde sin Claude son las **sesiones en la nube** (`.claude/`, `docs/setup_nube.md`).
-Esos archivos no estorban: puedes dejarlos.
+## Dos modos, el mismo sistema
+
+| | Con Claude (mientras pagues) | Sin Claude |
+|---|---|---|
+| Quién trabaja en `main` | Tú | Tú |
+| Qué hace Claude | Trabaja en una rama `claude/...` en la nube y te deja un **PR** | — |
+| Qué haces tú con eso | Revisas el PR en GitHub → **Merge** → `git pull` en el laptop | Nada: no llegan PR |
+| Datos | Claude y tú usan el mismo Drive con `make pull/push` | Solo tú, igual que siempre |
+| Revisión automática | Corre en cada PR de Claude y en cada push tuyo | Corre en cada push tuyo |
+
+El paso de un modo al otro **no requiere cambiar nada**. Cuando dejes de pagar:
+mezcla o cierra los PR abiertos de Claude (sección 1) y sigue trabajando en `main`.
+Los archivos de la nube (`.claude/`, `docs/setup_nube.md`) no estorban; puedes dejarlos.
+
+Mientras tengas Claude, conviene que todo lo que construya quede como **código que corres tú**
+(`make ...`), no como pasos que solo él sabe hacer. Si alguna vez algo funciona solo cuando
+Claude lo hace, pídele que lo convierta en un comando y lo documente aquí.
 
 ---
 
 ## 1. Git sin ayuda: trabaja directo en `main`
 
-Trabajas solo, así que no necesitas ramas ni PR. Usa siempre `main`.
+Tú trabajas siempre en `main`, sin ramas propias. Las ramas y los PR son solo de Claude.
 
 ### Ciclo de trabajo
 
@@ -48,10 +63,17 @@ escribes el mensaje, **Commit**, y luego **Sync Changes**.
 **Nunca uses** `git push --force`, `git reset --hard` ni `git clean -fd` si no sabes exactamente
 qué borran.
 
-### Si quedan ramas antiguas de Claude
+### Los PR de Claude
 
-En GitHub → *Pull requests*: si hay alguno abierto que quieres conservar, **Merge**; si no,
-**Close**. Las ramas `claude/...` se pueden borrar desde *Branches* una vez mezcladas.
+Mientras uses Claude, su trabajo llega como PR desde una rama `claude/...`:
+
+1. En GitHub → *Pull requests* → abre el PR. Mira la pestaña *Files changed* y que la
+   revisión automática esté en ✓.
+2. **Merge pull request** → *Confirm*.
+3. En el laptop: `git checkout main` → `git pull`.
+
+Si no quieres un PR, **Close**. Cuando dejes de pagar, mezcla o cierra los que queden.
+Las ramas `claude/...` ya mezcladas se pueden borrar desde *Branches*.
 
 ---
 

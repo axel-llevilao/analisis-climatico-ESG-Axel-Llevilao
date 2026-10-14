@@ -154,12 +154,13 @@ fuente y estado de verificación. La primera cadena a implementar es calor y sal
 
 ---
 
-## D-010 · El proyecto se opera sin depender de Claude
+## D-010 · El proyecto funciona con Claude y sin Claude
 
 **Contexto.** Axel debe poder mantener el proyecto solo, sin sesiones de Claude.
 
-**Decisión.** Las sesiones en la nube son opcionales. El trabajo ocurre en el laptop sobre la
-rama `main`, sin PR. La conexión a Drive usa la app OAuth propia (publicada), que no caduca
+**Decisión.** Mientras haya suscripción, Claude trabaja en ramas `claude/...` y entrega PR que
+Axel mezcla; sin suscripción, nada cambia salvo que dejan de llegar PR. Axel trabaja siempre
+en `main`. Lo que construya Claude queda como comandos `make` ejecutables sin él. La conexión a Drive usa la app OAuth propia (publicada), que no caduca
 mientras se use al menos cada 6 meses. Una revisión automática en GitHub Actions
 (`.github/workflows/check.yml`) corre `make check` en cada push, sin acceso a Drive ni claves.
 
