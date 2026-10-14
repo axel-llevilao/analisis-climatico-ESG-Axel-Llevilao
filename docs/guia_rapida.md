@@ -42,9 +42,9 @@ git push
 | Usar Python | Selector de intérpretes (arriba a la derecha) → **Python (.venv)**; o `uv run python script.py` |
 | Agregar un paquete R | Añadirlo en `Imports:` de `DESCRIPTION` → `make r-actualizar` → commit |
 | Agregar un paquete Python | `uv add <paquete>` → commit de `pyproject.toml` y `uv.lock` |
-| Integrar algo que hizo Claude | Revisar el PR en GitHub → **Merge** → `git pull` |
+| Integrar un PR abierto en GitHub | Revisarlo en GitHub → **Merge** → `git pull` |
 | Buscar repositorios en GitHub (solo en el laptop) | Editar `catalog/busquedas_github.txt` → `make buscar-repos` → commit de `catalog/repos_github.csv` |
-| Algo no funciona | `make doctor` y pegarle la salida a Claude |
+| Algo no funciona | `make doctor` y la tabla de diagnóstico de [`manual_autonomo.md`](manual_autonomo.md) |
 | Reinstalar el entorno | `make setup` |
 
 ---
@@ -68,7 +68,7 @@ git push
 
 ## Lo que no se toca nunca
 
-Estos archivos y carpetas los mantiene el sistema (o Claude, cuando se lo pidas):
+Estos archivos y carpetas los mantiene el sistema (los comandos `make` y `uv`):
 
 | Archivo o carpeta | Qué es |
 |---|---|
@@ -83,7 +83,7 @@ Estos archivos y carpetas los mantiene el sistema (o Claude, cuando se lo pidas)
 | La app `climachile-rclone` en console.cloud.google.com | Si se borra o se despublica, se corta el acceso a Drive |
 | Las variables `RCLONE_CONFIG_GDRIVE_*` del entorno en claude.ai/code | Acceso de la nube a Drive |
 
-Si crees que hay que cambiar algo de esta lista, pídeselo a Claude.
+Si hay que cambiar algo de esta lista, sigue [`manual_autonomo.md`](manual_autonomo.md).
 
 ---
 
@@ -109,5 +109,5 @@ Si crees que hay que cambiar algo de esta lista, pídeselo a Claude.
 | `Falta el paquete duckdb` | `make setup-r` |
 | `make push` dice que el archivo ya existe | Es la protección contra sobrescritura. Usa otra carpeta de versión o, si es intencional, `make push-forzar` |
 | `✗ acceso a Drive` | `rclone config reconnect gdrive:` y luego actualizar el token en la nube |
-| `git pull` se queja de cambios locales | No fuerces nada; pégale el mensaje a Claude |
+| `git pull` se queja de cambios locales | `git stash` → `git pull` → `git stash pop` (más casos en [`manual_autonomo.md`](manual_autonomo.md)) |
 | Positron arranca en Python | Cierra esa consola y elige R en el selector de intérpretes |
