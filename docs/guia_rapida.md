@@ -93,6 +93,7 @@ Si crees que hay que cambiar algo de esta lista, pídeselo a Claude.
 | Datos originales | `data/raw/<fuente>/<version>/` | No | Sí, con `make push` |
 | Datos limpios (Parquet) | `data/staging/<fuente>/` | No | Sí, con `make push` |
 | Tablas integradas | `data/marts/<tabla>/` | No | Sí, con `make push` |
+| Literatura (papers, informes en PDF) | `data/referencias/<tema>/autor_año_tema.pdf` | No | Sí, con `make push` |
 | Tus análisis (código, `.qmd`, notas) | `analisis/<AAAA-MM_nombre>/` | Sí | No |
 | Documentación | `docs/` | Sí | No |
 | Tablas de referencia pequeñas | `ref/` | Sí | No |

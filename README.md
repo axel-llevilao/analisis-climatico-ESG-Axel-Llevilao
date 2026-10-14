@@ -83,3 +83,4 @@ data/             caché local de datos (ignorada por git)
 | `staging/<fuente>/` | limpio, tipado, con CUT vigente; Parquet | una tabla por fuente |
 | `marts/<tabla>/` | tablas integradas para análisis (p. ej. panel CUT × año) | consumidas por análisis e informes |
 | `grids/<fuente>/<escenario>/` | grillas climáticas recortadas a Chile (NetCDF) | archivos medianos, no miles de chunks |
+| `referencias/<tema>/` | literatura de referencia (PDF), nombrada `autor_año_tema.pdf` | no se modifica |

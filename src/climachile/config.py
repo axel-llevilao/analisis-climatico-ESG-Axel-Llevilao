@@ -10,8 +10,8 @@ import os
 from dataclasses import dataclass
 from pathlib import Path, PurePosixPath
 
-# Capas de datos permitidas en la caché local y en Drive.
-CAPAS = ("raw", "staging", "marts", "grids")
+# Capas permitidas en la caché local y en Drive (datos + literatura de referencia).
+CAPAS = ("raw", "staging", "marts", "grids", "referencias")
 
 REMOTO_POR_DEFECTO = "gdrive:climachile-data"
 
