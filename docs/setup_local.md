@@ -5,7 +5,8 @@ Requisitos ya instalados: git, R 4.5, rclone, Quarto y uv.
 Librerías de sistema que necesitan los paquetes espaciales de R (`sf`, `terra`, `units`):
 
 ```bash
-sudo apt install libgdal-dev libproj-dev libgeos-dev libudunits2-dev libsqlite3-dev
+sudo apt install libgdal-dev libproj-dev libgeos-dev libudunits2-dev libsqlite3-dev \
+  gdal-bin libabsl-dev libuv1-dev
 ```
 
 ## 1. Clonar y preparar el entorno

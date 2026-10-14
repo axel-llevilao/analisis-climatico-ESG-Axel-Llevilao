@@ -26,8 +26,9 @@ command -v rclone >/dev/null || faltan+=(rclone)
 if [ "$(dpkg-query -W -f='${Version}' r-base-core 2>/dev/null)" != "$R_APT_VERSION" ]; then
   faltan+=("r-base-core=$R_APT_VERSION" "r-recommended=$R_APT_VERSION")
 fi
-# Librerías de sistema para sf/terra/units.
-for p in libgdal-dev libproj-dev libgeos-dev libudunits2-dev libsqlite3-dev; do
+# Librerías de sistema que piden sf/terra/units/s2/fs (según renv).
+for p in libgdal-dev libproj-dev libgeos-dev libudunits2-dev libsqlite3-dev \
+         gdal-bin libabsl-dev libuv1-dev; do
   dpkg -s "$p" >/dev/null 2>&1 || faltan+=("$p")
 done
 if [ ${#faltan[@]} -gt 0 ]; then
@@ -58,7 +59,10 @@ fi
 
 # 4. Paquetes R (renv) solo si CRAN / Posit Package Manager son alcanzables.
 if alcanza https://packagemanager.posit.co || alcanza https://cloud.r-project.org; then
-  Rscript R/setup.R >/tmp/renv-setup.log 2>&1 || avisos+=("renv falló; ver /tmp/renv-setup.log")
+  if ! Rscript R/setup.R >/tmp/renv-setup.log 2>&1; then
+    avisos+=("renv falló; últimas líneas de /tmp/renv-setup.log:")
+    while IFS= read -r l; do avisos+=("  $l"); done < <(grep -v '^\s*$' /tmp/renv-setup.log | tail -8)
+  fi
 else
   avisos+=("paquetes R no instalados: la red bloquea CRAN y Posit Package Manager")
 fi

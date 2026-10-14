@@ -14,7 +14,8 @@ if (Sys.info()[["sysname"]] == "Linux") {
     stop(
       "Faltan librerías de sistema: ", paste(faltan, collapse = ", "), ".\n",
       "Instálalas y vuelve a correr `make setup-r`:\n\n",
-      "  sudo apt install libgdal-dev libproj-dev libgeos-dev libudunits2-dev libsqlite3-dev\n",
+      "  sudo apt install libgdal-dev libproj-dev libgeos-dev libudunits2-dev libsqlite3-dev \\\n",
+      "    gdal-bin libabsl-dev libuv1-dev\n",
       call. = FALSE
     )
   }
