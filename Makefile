@@ -6,11 +6,12 @@
 #   make push RUTA=raw/x    sube datos a Drive y actualiza el manifiesto
 #   make ls [RUTA=raw]      lista lo que hay en Drive
 #   make check              lint + tests
+#   make buscar-repos       busca repos en GitHub (laptop, requiere gh) -> catalog/repos_github.csv
 
 UV ?= uv
 CLI = $(UV) run --quiet climachile
 
-.PHONY: help setup setup-py setup-r r-actualizar doctor pull push push-forzar ls verificar lint test check
+.PHONY: buscar-repos help setup setup-py setup-r r-actualizar doctor pull push push-forzar ls verificar lint test check
 
 help:
 	@grep -E '^#' Makefile | sed 's/^# \{0,1\}//'
@@ -50,9 +51,12 @@ verificar:
 	$(CLI) verificar "$(RUTA)"
 
 lint:
-	$(UV) run ruff check src tests
+	$(UV) run ruff check src tests scripts
 
 test:
 	$(UV) run pytest -q
 
 check: lint test
+
+buscar-repos:
+	$(UV) run --quiet python scripts/buscar_repos.py

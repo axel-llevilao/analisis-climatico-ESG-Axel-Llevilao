@@ -43,6 +43,7 @@ git push
 | Agregar un paquete R | Añadirlo en `Imports:` de `DESCRIPTION` → `make r-actualizar` → commit |
 | Agregar un paquete Python | `uv add <paquete>` → commit de `pyproject.toml` y `uv.lock` |
 | Integrar algo que hizo Claude | Revisar el PR en GitHub → **Merge** → `git pull` |
+| Buscar repositorios en GitHub (solo en el laptop) | Editar `catalog/busquedas_github.txt` → `make buscar-repos` → commit de `catalog/repos_github.csv` |
 | Algo no funciona | `make doctor` y pegarle la salida a Claude |
 | Reinstalar el entorno | `make setup` |
 
