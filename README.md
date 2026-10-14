@@ -61,6 +61,7 @@ DBI::dbGetQuery(con, "select * from panel limit 5")
 - Decisiones de diseño: [`docs/decisiones.md`](docs/decisiones.md)
 - **Metodología: [`docs/metodologia_riesgo_poblacional.md`](docs/metodologia_riesgo_poblacional.md)**
 - Revisión de repositorios abiertos: [`docs/revision_github.md`](docs/revision_github.md)
+- Acceso a datos del Estado: [`docs/acceso_datos_estado.md`](docs/acceso_datos_estado.md) · catálogo [`catalog/fuentes.yaml`](catalog/fuentes.yaml)
 
 ## Estructura
 
