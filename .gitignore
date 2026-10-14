@@ -1,0 +1,73 @@
+# --- Datos: nunca a git (viven en Google Drive, se sincronizan con `make pull/push`) ---
+/data/
+*.parquet
+*.nc
+*.nc4
+*.zarr/
+*.gpkg
+*.shp
+*.shx
+*.dbf
+*.prj
+*.tif
+*.tiff
+*.duckdb
+*.duckdb.wal
+*.sav
+*.dta
+*.rds
+*.RData
+*.xls
+*.ods
+*.geojson
+*.kml
+*.kmz
+*.feather
+*.arrow
+*.grib
+*.grb
+*.grb2
+*.h5
+*.hdf5
+*.sqlite
+*.db
+*.zip
+*.7z
+*.gz
+# CSV/XLSX solo se permiten en ref/ y catalog/ (tablas pequeñas versionadas)
+*.csv
+*.xlsx
+!ref/**/*.csv
+!catalog/**/*.csv
+
+# --- Secretos y configuración local ---
+.env
+rclone.conf
+
+# --- Python ---
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+
+# --- R / renv / Positron ---
+.Rproj.user/
+.Rhistory
+.Rdata
+renv/library/
+renv/staging/
+renv/local/
+renv/cellar/
+renv/python/
+
+# --- Quarto ---
+/.quarto/
+_site/
+_freeze/
+*_files/
+
+# --- Sistema ---
+.DS_Store
+*.swp

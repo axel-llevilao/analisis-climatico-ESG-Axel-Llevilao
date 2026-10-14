@@ -1,0 +1,7 @@
+{
+  // Configuración de Positron para este proyecto (R primero, Python a pedido).
+  "[python]": {
+    "interpreters.startupBehavior": "manual"
+  },
+  "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python"
+}

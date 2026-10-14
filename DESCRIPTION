@@ -1,0 +1,21 @@
+Type: project
+Package: climachile
+Title: Dependencias R del proyecto climachile
+Version: 0.1.0
+Description: Lista explícita de paquetes R que usa el proyecto. renv fija sus
+    versiones en renv.lock (snapshot de tipo "explicit"). Para agregar un paquete:
+    añádelo aquí y corre `make r-actualizar`.
+Imports:
+    DBI,
+    duckdb,
+    arrow,
+    dplyr,
+    tidyr,
+    readr,
+    sf,
+    terra,
+    survey,
+    srvyr,
+    quarto,
+    shiny,
+    rprojroot
