@@ -1,0 +1,22 @@
+# Una búsqueda por línea (sintaxis del buscador de GitHub). Las líneas con # se ignoran.
+# Resultado: catalog/repos_github.csv (lo genera `make buscar-repos` en el laptop).
+climate risk assessment population
+climate risk hazard exposure vulnerability
+heat health mortality temperature
+heatwave population exposure
+drought index SPEI
+flood risk population exposure
+wildfire risk wildland urban interface
+climate scenarios NGFS
+shared socioeconomic pathways population projections
+energy poverty households
+just transition coal workers
+carbon price household distributional impact
+zonal statistics population weighted
+chile clima
+chile comunas
+chile censo
+chile casen
+ARClim
+CR2MET
+america latina riesgo climatico
