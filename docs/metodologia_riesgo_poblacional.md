@@ -115,8 +115,11 @@ catalogan y verifican en el Módulo 2.
 
 Hay dos rutas, en orden de preferencia:
 
-1. **Ruta A: indicadores ARClim comunales.** Se usan tal cual, con su fuente y versión. Limitación:
-   solo cubren RCP8.5 2035–2065 frente a 1980–2010 **[V]**.
+1. **Ruta A: indicadores ARClim comunales.** Se usan tal cual, con su fuente y versión. ARClim
+   publica un GeoJSON con 59 indicadores para 345 comunas (presente, futuro y delta), con el CUT
+   como clave **[V]** (`docs/revision_github.md`). Limitación: un solo escenario y un solo horizonte
+   (RCP8.5 2035–2065 frente a 1980–2010 según la metodología de 2020 **[V]**; la versión vigente
+   del archivo está por confirmar **[NV]**).
 2. **Ruta B: cálculo propio desde CMIP6 regionalizado.** Permite varios escenarios y horizontes.
    - Datos: CMIP6 con reducción de escala estadística (p. ej., NEX-GDDP-CMIP6) y observación de
      referencia (CR2MET) **[NV]**.
