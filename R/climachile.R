@@ -42,7 +42,7 @@ cc_data_dir <- function(raiz = cc_raiz()) {
 }
 
 cc_ruta <- function(ruta) {
-  capas <- c("raw", "staging", "marts", "grids")
+  capas <- c("raw", "staging", "marts", "grids", "referencias")
   ruta <- gsub("^/+|/+$", "", ruta)
   if (!(strsplit(ruta, "/")[[1]][1] %in% capas) || grepl("\\.\\.", ruta)) {
     stop("La ruta debe partir con una capa: ", paste(capas, collapse = ", "))

@@ -135,6 +135,25 @@ creado con el client_id compartido es el de prueba: se borra y se vuelve a subir
 
 ---
 
+## D-009 · Procedimiento de riesgo con enfoque poblacional, a partir de la app "ESG Suite"
+**Fecha:** 2026-10-14 · **Estado:** propuesta (en revisión)
+
+**Contexto.** El usuario aportó una app corporativa de riesgo climático (React/Electron, "ESG
+Suite / Climato Suite"). Se revisó su lógica de cálculo: los puntajes de amenaza por región son
+estimaciones cualitativas (no datos de ARClim), el escalamiento por escenario usa elasticidades
+sin fuente y las trayectorias de precio del carbono están escritas a mano.
+
+**Decisión.** No reutilizar el código. Reutilizar su estructura conceptual: amenaza × exposición ×
+vulnerabilidad, la tabla de calentamiento IPCC AR6 SPM.1, los escenarios NGFS Fase V, la
+coherencia entre escenarios físicos y de transición, y el reporte del riesgo como métrica de
+impacto. Todo se adapta a la comuna y a la población, con datos públicos. Detalle en
+`docs/metodologia_riesgo_poblacional.md`.
+
+**Consecuencias.** Los parámetros viven en un único `catalog/parametros.yaml`, cada uno con su
+fuente y estado de verificación. La primera cadena a implementar es calor y salud.
+
+---
+
 ## Pendientes (se decidirán más adelante)
 
 - Caso piloto: A) calor extremo y población mayor (recomendado), B) estrés hídrico
