@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>climachile</title>
+<style>
+  :root { --fondo:#ffffff; --texto:#1f2328; --suave:#59636e; --enlace:#0b6bcb; }
+  @media (prefers-color-scheme: dark) { :root { --fondo:#0d1117; --texto:#e6edf3; --suave:#9198a1; --enlace:#4493f8; } }
+  body { background:var(--fondo); color:var(--texto); font:16px/1.6 system-ui, sans-serif;
+         max-width:720px; margin:0 auto; padding:32px 16px; }
+  a { color:var(--enlace); }  .suave { color:var(--suave); }
+</style>
+</head>
+<body>
+<h1>climachile</h1>
+<p>Plataforma abierta de datos para el análisis de riesgo climático físico y de transición
+en Chile, desarrollada por Axel Llevilao.</p>
+
+<h2>climachile-rclone</h2>
+<p><strong>climachile-rclone</strong> es la aplicación OAuth de uso personal que el proyecto
+usa para sincronizar archivos de datos entre los equipos del autor y su propio Google Drive,
+mediante la herramienta de código abierto <a href="https://rclone.org/">rclone</a>.
+Solo accede a los archivos que ella misma crea (permiso <code>drive.file</code>), dentro de la
+carpeta <code>climachile-data</code>. No es un servicio para terceros.</p>
+
+<ul>
+  <li><a href="privacidad.html">Política de privacidad</a></li>
+  <li><a href="https://github.com/axel-llevilao/analisis-climatico-ESG-Axel-Llevilao">Código fuente en GitHub</a></li>
+</ul>
+<p class="suave">Contacto: <a href="https://github.com/axel-llevilao">github.com/axel-llevilao</a></p>
+</body>
+</html>
