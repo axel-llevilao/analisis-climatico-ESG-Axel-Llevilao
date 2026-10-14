@@ -63,38 +63,41 @@
     },
     "KernSmooth": {
       "Package": "KernSmooth",
-      "Version": "2.23-22",
+      "Version": "2.23-27",
       "Source": "Repository",
       "Priority": "recommended",
-      "Date": "2023-07-10",
-      "Title": "Functions for Kernel Smoothing Supporting Wand & Jones (1995)",
-      "Authors@R": "c(person(\"Matt\", \"Wand\", role = \"aut\", email = \"Matt.Wand@uts.edu.au\"), person(\"Cleve\", \"Moler\", role = \"ctb\", comment = \"LINPACK routines in src/d*\"), person(\"Brian\", \"Ripley\", role = c(\"trl\", \"cre\", \"ctb\"), email = \"ripley@stats.ox.ac.uk\", comment = \"R port and updates\"))",
-      "Note": "Maintainers are not available to give advice on using a package they did not author.",
       "Depends": [
         "R (>= 2.5.0)",
         "stats"
+      ],
+      "Imports": [
+        null
+      ],
+      "LinkingTo": [
+        null
       ],
       "Suggests": [
         "MASS",
         "carData"
       ],
-      "Description": "Functions for kernel smoothing (and density estimation) corresponding to the book:  Wand, M.P. and Jones, M.C. (1995) \"Kernel Smoothing\".",
+      "Enhances": [
+        null
+      ],
       "License": "Unlimited",
-      "ByteCompile": "yes",
+      "License_is_FOSS": null,
+      "License_restricts_use": null,
+      "OS_type": null,
       "NeedsCompilation": "yes",
-      "Author": "Matt Wand [aut], Cleve Moler [ctb] (LINPACK routines in src/d*), Brian Ripley [trl, cre, ctb] (R port and updates)",
-      "Maintainer": "Brian Ripley <ripley@stats.ox.ac.uk>",
-      "Repository": "CRAN"
+      "Repository": "CRAN",
+      "Type": "source"
     },
     "MASS": {
       "Package": "MASS",
-      "Version": "7.3-60.0.1",
+      "Version": "7.3-66",
       "Source": "Repository",
       "Priority": "recommended",
-      "Date": "2024-01-12",
-      "Revision": "$Rev: 3621 $",
       "Depends": [
-        "R (>= 4.0)",
+        "R (>= 4.4.0)",
         "grDevices",
         "graphics",
         "stats",
@@ -103,41 +106,33 @@
       "Imports": [
         "methods"
       ],
+      "LinkingTo": [
+        null
+      ],
       "Suggests": [
         "lattice",
         "nlme",
         "nnet",
         "survival"
       ],
-      "Authors@R": "c(person(\"Brian\", \"Ripley\", role = c(\"aut\", \"cre\", \"cph\"), email = \"ripley@stats.ox.ac.uk\"), person(\"Bill\", \"Venables\", role = \"ctb\"), person(c(\"Douglas\", \"M.\"), \"Bates\", role = \"ctb\"), person(\"Kurt\", \"Hornik\", role = \"trl\", comment = \"partial port ca 1998\"), person(\"Albrecht\", \"Gebhardt\", role = \"trl\", comment = \"partial port ca 1998\"), person(\"David\", \"Firth\", role = \"ctb\"))",
-      "Description": "Functions and datasets to support Venables and Ripley, \"Modern Applied Statistics with S\" (4th edition, 2002).",
-      "Title": "Support Functions and Datasets for Venables and Ripley's MASS",
-      "LazyData": "yes",
-      "ByteCompile": "yes",
+      "Enhances": [
+        null
+      ],
       "License": "GPL-2 | GPL-3",
-      "URL": "http://www.stats.ox.ac.uk/pub/MASS4/",
-      "Contact": "<MASS@stats.ox.ac.uk>",
+      "License_is_FOSS": null,
+      "License_restricts_use": null,
+      "OS_type": null,
       "NeedsCompilation": "yes",
-      "Author": "Brian Ripley [aut, cre, cph], Bill Venables [ctb], Douglas M. Bates [ctb], Kurt Hornik [trl] (partial port ca 1998), Albrecht Gebhardt [trl] (partial port ca 1998), David Firth [ctb]",
-      "Maintainer": "Brian Ripley <ripley@stats.ox.ac.uk>",
-      "Repository": "CRAN"
+      "Repository": "CRAN",
+      "Type": "source"
     },
     "Matrix": {
       "Package": "Matrix",
-      "Version": "1.6-5",
+      "Version": "1.7-6",
       "Source": "Repository",
-      "VersionNote": "do also bump src/version.h, inst/include/Matrix/version.h",
-      "Date": "2024-01-06",
       "Priority": "recommended",
-      "Title": "Sparse and Dense Matrix Classes and Methods",
-      "Description": "A rich hierarchy of sparse and dense matrix classes, including general, symmetric, triangular, and diagonal matrices with numeric, logical, or pattern entries.  Efficient methods for operating on such matrices, often wrapping the 'BLAS', 'LAPACK', and 'SuiteSparse' libraries.",
-      "License": "GPL (>= 2) | file LICENCE",
-      "URL": "https://Matrix.R-forge.R-project.org",
-      "BugReports": "https://R-forge.R-project.org/tracker/?atid=294&group_id=61",
-      "Contact": "Matrix-authors@R-project.org",
-      "Authors@R": "c(person(\"Douglas\", \"Bates\", role = \"aut\", comment = c(ORCID = \"0000-0001-8316-9503\")), person(\"Martin\", \"Maechler\", role = c(\"aut\", \"cre\"), email = \"mmaechler+Matrix@gmail.com\", comment = c(ORCID = \"0000-0002-8685-9910\")), person(\"Mikael\", \"Jagan\", role = \"aut\", comment = c(ORCID = \"0000-0002-3542-2938\")), person(\"Timothy A.\", \"Davis\", role = \"ctb\", comment = c(ORCID = \"0000-0001-7614-6899\", \"SuiteSparse libraries, notably CHOLMOD and AMD\", \"collaborators listed in dir(pattern=\\\"^[A-Z]+[.]txt$\\\", full.names=TRUE, system.file(\\\"doc\\\", \\\"SuiteSparse\\\", package=\\\"Matrix\\\"))\")), person(\"Jens\", \"Oehlschl\u00e4gel\", role = \"ctb\", comment = \"initial nearPD()\"), person(\"Jason\", \"Riedy\", role = \"ctb\", comment = c(ORCID = \"0000-0002-4345-4200\", \"GNU Octave's condest() and onenormest()\", \"Copyright: Regents of the University of California\")), person(\"R Core Team\", role = \"ctb\", comment = \"base R's matrix implementation\"))",
       "Depends": [
-        "R (>= 3.5.0)",
+        "R (>= 4.4)",
         "methods"
       ],
       "Imports": [
@@ -147,6 +142,9 @@
         "lattice",
         "stats",
         "utils"
+      ],
+      "LinkingTo": [
+        null
       ],
       "Suggests": [
         "MASS",
@@ -158,14 +156,13 @@
         "SparseM",
         "graph"
       ],
-      "LazyData": "no",
-      "LazyDataNote": "not possible, since we use data/*.R and our S4 classes",
-      "BuildResaveData": "no",
-      "Encoding": "UTF-8",
+      "License": "GPL (>= 2) | file LICENCE",
+      "License_is_FOSS": null,
+      "License_restricts_use": null,
+      "OS_type": null,
       "NeedsCompilation": "yes",
-      "Author": "Douglas Bates [aut] (<https://orcid.org/0000-0001-8316-9503>), Martin Maechler [aut, cre] (<https://orcid.org/0000-0002-8685-9910>), Mikael Jagan [aut] (<https://orcid.org/0000-0002-3542-2938>), Timothy A. Davis [ctb] (<https://orcid.org/0000-0001-7614-6899>, SuiteSparse libraries, notably CHOLMOD and AMD, collaborators listed in dir(pattern=\"^[A-Z]+[.]txt$\", full.names=TRUE, system.file(\"doc\", \"SuiteSparse\", package=\"Matrix\"))), Jens Oehlschl\u00e4gel [ctb] (initial nearPD()), Jason Riedy [ctb] (<https://orcid.org/0000-0002-4345-4200>, GNU Octave's condest() and onenormest(), Copyright: Regents of the University of California), R Core Team [ctb] (base R's matrix implementation)",
-      "Maintainer": "Martin Maechler <mmaechler+Matrix@gmail.com>",
-      "Repository": "CRAN"
+      "Repository": "CRAN",
+      "Type": "source"
     },
     "R6": {
       "Package": "R6",
@@ -568,28 +565,33 @@
     },
     "class": {
       "Package": "class",
-      "Version": "7.3-22",
+      "Version": "7.3-24",
       "Source": "Repository",
       "Priority": "recommended",
-      "Date": "2023-05-02",
       "Depends": [
         "R (>= 3.0.0)",
         "stats",
         "utils"
       ],
       "Imports": [
+        null
+      ],
+      "LinkingTo": [
+        null
+      ],
+      "Suggests": [
         "MASS"
       ],
-      "Authors@R": "c(person(\"Brian\", \"Ripley\", role = c(\"aut\", \"cre\", \"cph\"), email = \"ripley@stats.ox.ac.uk\"), person(\"William\", \"Venables\", role = \"cph\"))",
-      "Description": "Various functions for classification, including k-nearest neighbour, Learning Vector Quantization and Self-Organizing Maps.",
-      "Title": "Functions for Classification",
-      "ByteCompile": "yes",
+      "Enhances": [
+        null
+      ],
       "License": "GPL-2 | GPL-3",
-      "URL": "http://www.stats.ox.ac.uk/pub/MASS4/",
+      "License_is_FOSS": null,
+      "License_restricts_use": null,
+      "OS_type": null,
       "NeedsCompilation": "yes",
-      "Author": "Brian Ripley [aut, cre, cph], William Venables [cph]",
-      "Maintainer": "Brian Ripley <ripley@stats.ox.ac.uk>",
-      "Repository": "CRAN"
+      "Repository": "CRAN",
+      "Type": "source"
     },
     "classInt": {
       "Package": "classInt",
@@ -1563,21 +1565,11 @@
     },
     "lattice": {
       "Package": "lattice",
-      "Version": "0.22-5",
+      "Version": "0.23-1",
       "Source": "Repository",
-      "Date": "2023-10-23",
       "Priority": "recommended",
-      "Title": "Trellis Graphics for R",
-      "Authors@R": "c(person(\"Deepayan\", \"Sarkar\", role = c(\"aut\", \"cre\"), email = \"deepayan.sarkar@r-project.org\", comment = c(ORCID = \"0000-0003-4107-1553\")), person(\"Felix\", \"Andrews\", role = \"ctb\"), person(\"Kevin\", \"Wright\", role = \"ctb\", comment = \"documentation\"), person(\"Neil\", \"Klepeis\", role = \"ctb\"), person(\"Johan\", \"Larsson\", role = \"ctb\", comment = \"miscellaneous improvements\"), person(\"Zhijian (Jason)\", \"Wen\", role = \"cph\", comment = \"filled contour code\"), person(\"Paul\", \"Murrell\", role = \"ctb\", email = \"paul@stat.auckland.ac.nz\"), person(\"Stefan\", \"Eng\", role = \"ctb\", comment = \"violin plot improvements\"), person(\"Achim\", \"Zeileis\", role = \"ctb\", comment = \"modern colors\"), person(\"Alexandre\", \"Courtiol\", role = \"ctb\", comment = \"generics for larrows, lpolygon, lrect and lsegments\") )",
-      "Description": "A powerful and elegant high-level data visualization system inspired by Trellis graphics, with an emphasis on multivariate data. Lattice is sufficient for typical graphics needs, and is also flexible enough to handle most nonstandard requirements. See ?Lattice for an introduction.",
       "Depends": [
         "R (>= 4.0.0)"
-      ],
-      "Suggests": [
-        "KernSmooth",
-        "MASS",
-        "latticeExtra",
-        "colorspace"
       ],
       "Imports": [
         "grid",
@@ -1586,19 +1578,26 @@
         "stats",
         "utils"
       ],
+      "LinkingTo": [
+        null
+      ],
+      "Suggests": [
+        "KernSmooth",
+        "MASS",
+        "latticeExtra",
+        "colorspace"
+      ],
       "Enhances": [
         "chron",
         "zoo"
       ],
-      "LazyLoad": "yes",
-      "LazyData": "yes",
       "License": "GPL (>= 2)",
-      "URL": "https://lattice.r-forge.r-project.org/",
-      "BugReports": "https://github.com/deepayan/lattice/issues",
+      "License_is_FOSS": null,
+      "License_restricts_use": null,
+      "OS_type": null,
       "NeedsCompilation": "yes",
-      "Author": "Deepayan Sarkar [aut, cre] (<https://orcid.org/0000-0003-4107-1553>), Felix Andrews [ctb], Kevin Wright [ctb] (documentation), Neil Klepeis [ctb], Johan Larsson [ctb] (miscellaneous improvements), Zhijian (Jason) Wen [cph] (filled contour code), Paul Murrell [ctb], Stefan Eng [ctb] (violin plot improvements), Achim Zeileis [ctb] (modern colors), Alexandre Courtiol [ctb] (generics for larrows, lpolygon, lrect and lsegments)",
-      "Maintainer": "Deepayan Sarkar <deepayan.sarkar@r-project.org>",
-      "Repository": "CRAN"
+      "Repository": "CRAN",
+      "Type": "source"
     },
     "lifecycle": {
       "Package": "lifecycle",
@@ -2971,13 +2970,11 @@
     },
     "survival": {
       "Package": "survival",
-      "Version": "3.5-8",
+      "Version": "3.8-12",
       "Source": "Repository",
-      "Title": "Survival Analysis",
       "Priority": "recommended",
-      "Date": "2024-02-13",
       "Depends": [
-        "R (>= 3.5.0)"
+        "R (>= 4.1.0)"
       ],
       "Imports": [
         "graphics",
@@ -2987,17 +2984,22 @@
         "stats",
         "utils"
       ],
-      "LazyData": "Yes",
-      "LazyDataCompression": "xz",
-      "ByteCompile": "Yes",
-      "Authors@R": "c(person(c(\"Terry\", \"M\"), \"Therneau\", email=\"therneau.terry@mayo.edu\", role=c(\"aut\", \"cre\")), person(\"Thomas\", \"Lumley\", role=c(\"ctb\", \"trl\"), comment=\"original S->R port and R maintainer until 2009\"), person(\"Atkinson\", \"Elizabeth\", role=\"ctb\"), person(\"Crowson\", \"Cynthia\", role=\"ctb\"))",
-      "Description": "Contains the core survival analysis routines, including definition of Surv objects,  Kaplan-Meier and Aalen-Johansen (multi-state) curves, Cox models, and parametric accelerated failure time models.",
+      "LinkingTo": [
+        null
+      ],
+      "Suggests": [
+        null
+      ],
+      "Enhances": [
+        null
+      ],
       "License": "LGPL (>= 2)",
-      "URL": "https://github.com/therneau/survival",
+      "License_is_FOSS": null,
+      "License_restricts_use": null,
+      "OS_type": null,
       "NeedsCompilation": "yes",
-      "Author": "Terry M Therneau [aut, cre], Thomas Lumley [ctb, trl] (original S->R port and R maintainer until 2009), Atkinson Elizabeth [ctb], Crowson Cynthia [ctb]",
-      "Maintainer": "Terry M Therneau <therneau.terry@mayo.edu>",
-      "Repository": "CRAN"
+      "Repository": "CRAN",
+      "Type": "source"
     },
     "terra": {
       "Package": "terra",
