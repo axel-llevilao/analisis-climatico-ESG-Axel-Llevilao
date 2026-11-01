@@ -57,6 +57,7 @@ DBI::dbGetQuery(con, "select * from panel limit 5")
 
 - En tu laptop: [`docs/setup_local.md`](docs/setup_local.md)
 - En la nube: [`docs/setup_nube.md`](docs/setup_nube.md)
+- En la Steam Deck (SteamOS): [`docs/setup_steamdeck.md`](docs/setup_steamdeck.md)
 - **Uso diario: [`docs/guia_rapida.md`](docs/guia_rapida.md)**
 - **Operación con y sin Claude (git, PR, Drive, laptop nuevo, diagnóstico): [`docs/manual_autonomo.md`](docs/manual_autonomo.md)**
 - Decisiones de diseño: [`docs/decisiones.md`](docs/decisiones.md)
