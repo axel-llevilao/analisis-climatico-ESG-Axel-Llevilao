@@ -1,5 +1,9 @@
 {
   // Configuración de Positron para este proyecto (R primero, Python a pedido).
+  // R arranca siempre al abrir el proyecto; Python solo cuando lo eliges en el selector.
+  "[r]": {
+    "interpreters.startupBehavior": "always"
+  },
   "[python]": {
     "interpreters.startupBehavior": "manual"
   },
