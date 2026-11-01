@@ -1,0 +1,257 @@
+# Catálogo de fuentes de datos (Módulo 2) — versión inicial.
+# estado: verificado = descarga real probada desde la nube en la fecha indicada;
+#         bloqueado_nube = el sitio responde desde Chile pero no desde la nube (usar el laptop);
+#         no_verificado = identificado, sin descarga probada.
+# acceso: descarga | api | arcgis_rest | bucket | laptop
+# Las licencias marcadas "no_verificado" se revisan antes de publicar resultados.
+
+fuentes:
+
+  - id: ine_censo2024_manzana
+    nombre: Censo de Población y Vivienda 2024 — base agregada por manzana/entidad
+    institucion: INE
+    componente: [exposicion, vulnerabilidad, transicion]
+    url: https://storage.googleapis.com/bktdescargascenso2024/Datos_agregados/Base_manzana_entidad_CPV24.zip
+    formato: CSV (separador ;) dentro de ZIP
+    tamano: 25 MB comprimido, 116 MB descomprimido
+    cobertura_espacial: nacional; manzana/entidad, con CUT de 346 comunas
+    cobertura_temporal: "2024"
+    contenido: >
+      212 variables: personas por sexo y tramos de edad (0-5 … 60+), discapacidad, escolaridad,
+      ocupación (CIUO), rama de actividad (CAENES A-U), transporte al trabajo, hogares, combustible de
+      cocina y calefacción (incl. leña), materialidad, hacinamiento, déficit habitacional, fuente y
+      distribución de agua, saneamiento, fuente de electricidad.
+    clave_union: CUT (comuna); MANZENT (manzana)
+    acceso: bucket
+    licencia: no_verificado
+    prioridad: alta
+    estado: verificado
+    verificado_el: 2026-10-14
+    notas: "Suma de personas = 18.480.432 (coincide con la cifra oficial). Tramo de edad superior es 60+, no 65+."
+
+  - id: ine_censo2024_microdatos
+    nombre: Censo 2024 — microdatos de personas, hogares y viviendas
+    institucion: INE
+    componente: [exposicion, vulnerabilidad]
+    url: https://storage.googleapis.com/bktdescargascenso2024/personas_censo2024.zip
+    url_otros: [hogares_censo2024.zip, viviendas_censo2024.zip, viv_hog_per_censo2024.zip, Datos_agregados/diccionario_variables_glosas_censo2024.xlsx]
+    formato: CSV/Parquet dentro de ZIP (según la documentación del INE)
+    tamano: personas 355 MB, hogares 45 MB, viviendas 56 MB (comprimidos)
+    cobertura_espacial: nacional; comuna y área urbano/rural
+    cobertura_temporal: "2024"
+    clave_union: CUT
+    acceso: bucket
+    licencia: no_verificado
+    prioridad: alta
+    estado: verificado
+    verificado_el: 2026-10-14
+    notas: "Necesario para la población de 65+ años por comuna. Existencia y tamaño verificados; contenido pendiente de abrir."
+
+  - id: ine_censo2024_cartografia
+    nombre: Censo 2024 — cartografía (manzanas, entidades, comunas)
+    institucion: INE
+    componente: [exposicion]
+    url: https://storage.googleapis.com/bktdescargascenso2024/Cartografia/GEOPARQUET/Cartografia_censo2024_Pais.zip
+    formato: GeoParquet, GPKG o GDB; nacional o por región
+    tamano: país 795 MB (GeoParquet); por región 3–115 MB
+    clave_union: CUT, MANZENT
+    acceso: bucket
+    licencia: no_verificado
+    prioridad: media
+    estado: verificado
+    verificado_el: 2026-10-14
+
+  - id: ine_proyecciones_comunales
+    nombre: Estimaciones y proyecciones de población 2002-2035, comunas (base Censo 2017)
+    institucion: INE
+    componente: [exposicion]
+    url: https://www.ine.gob.cl/docs/default-source/proyecciones-de-poblacion/cuadros-estadisticos/base-2017/estimaciones-y-proyecciones-2002-2035-comunas.xlsx
+    formato: XLSX
+    tamano: 11 MB
+    cobertura_espacial: 346 comunas
+    cobertura_temporal: 2002-2035 (anual)
+    contenido: población por comuna, sexo y edad simple
+    clave_union: CUT (columna Comuna)
+    acceso: descarga
+    licencia: no_verificado
+    prioridad: alta
+    estado: verificado
+    verificado_el: 2026-10-14
+    notas: "Base Censo 2017; el INE podría publicar nuevas proyecciones con base 2024."
+
+  - id: mdsf_sae_pobreza_ingresos_2024
+    nombre: Estimación de pobreza por ingresos por comuna (SAE) 2024
+    institucion: Ministerio de Desarrollo Social y Familia
+    componente: [vulnerabilidad]
+    url: https://observatorio.ministeriodesarrollosocial.gob.cl/storage/docs/pobreza-comunal/2024/SAE_ingresos_2024.xlsx
+    url_otros:
+      - https://observatorio.ministeriodesarrollosocial.gob.cl/storage/docs/pobreza-comunal/2024/SAE_multidimensional_2024.xlsx
+      - https://observatorio.ministeriodesarrollosocial.gob.cl/storage/docs/pobreza-comunal/2022/Estimaciones_Tasa_Pobreza_Ingresos_Comunas_2022.xlsx
+    formato: XLSX
+    tamano: 60 KB
+    cobertura_espacial: comunas
+    cobertura_temporal: "2024 (también 2022 y anteriores)"
+    contenido: tasa de pobreza con intervalo (límite inferior y superior) y presencia de la comuna en la muestra CASEN
+    clave_union: CUT (columna Código)
+    acceso: descarga
+    licencia: no_verificado
+    prioridad: alta
+    estado: verificado
+    verificado_el: 2026-10-14
+
+  - id: mdsf_casen_2024
+    nombre: Encuesta CASEN 2024 — base de datos (y base con provincia y comuna)
+    institucion: Ministerio de Desarrollo Social y Familia
+    componente: [vulnerabilidad, transicion]
+    url: https://observatorio.ministeriodesarrollosocial.gob.cl/storage/docs/casen/2024/casen_2024.dta
+    url_otros:
+      - https://observatorio.ministeriodesarrollosocial.gob.cl/storage/docs/casen/2024/casen_2024_provincia_comuna.dta
+      - https://observatorio.ministeriodesarrollosocial.gob.cl/storage/docs/casen/2024/Libro_de_codigos_Casen_2024.xlsx
+    formato: Stata (.dta) o SPSS (.sav)
+    cobertura_espacial: representativa a nivel nacional, regional y por área urbano/rural; NO comunal
+    cobertura_temporal: "2024 (también 2022, con base de provincia y comuna)"
+    clave_union: región, comuna (solo para cruces, no para estimar a nivel comunal)
+    acceso: descarga
+    licencia: no_verificado
+    prioridad: alta
+    estado: verificado
+    verificado_el: 2026-10-14
+    notas: "Enlaces vigentes en la página del observatorio. Usar con el diseño muestral (survey/srvyr)."
+
+  - id: sii_empresas_comuna_actividad
+    nombre: Estadísticas de empresas por comuna y actividad económica
+    institucion: SII
+    componente: [transicion]
+    url: https://www.sii.cl/sobre_el_sii/empresas/PUB_COMU_ACT.xlsb
+    url_otros: [PUB_COMU_RUBR.xlsb, PUB_COMU_SUBR.xlsb, PUB_COMU_TRTRAB.xlsb]
+    formato: XLSB (Excel binario)
+    tamano: 108 MB
+    cobertura_espacial: comunas
+    contenido: número de empresas, ventas y trabajadores dependientes por comuna y actividad
+    clave_union: comuna (nombre o código SII; requiere tabla de correspondencia con CUT)
+    acceso: descarga
+    licencia: no_verificado
+    prioridad: alta
+    estado: verificado
+    verificado_el: 2026-10-14
+    notas: "estadisticas.sii.cl está bloqueado desde la nube; www.sii.cl funciona."
+
+  - id: minvu_catastro_campamentos
+    nombre: Catastro Nacional de Campamentos (2019, 2022, 2024, 2026)
+    institucion: MINVU
+    componente: [exposicion, vulnerabilidad]
+    url: https://geoide.minvu.cl/server/rest/services/Catastros/Catastros_campamentos/MapServer
+    formato: ArcGIS REST (exportable a GeoJSON)
+    cobertura_espacial: polígonos de campamentos, con CUT
+    contenido: nombre, comuna, CUT, número de hogares (N_HOG), hectáreas
+    clave_union: CUT
+    acceso: arcgis_rest
+    licencia: no_verificado
+    prioridad: media
+    estado: verificado
+    verificado_el: 2026-10-14
+    notas: "Capa 2024 = 1.432 campamentos (coincide con la cifra publicada)."
+
+  - id: dga_derechos_agua
+    nombre: Derechos de aprovechamiento de aguas registrados en la DGA (2025)
+    institucion: DGA (MOP)
+    componente: [exposicion, vulnerabilidad]
+    url: https://datos.gob.cl/dataset/51889deb-a8bf-421f-87be-e1a88f4a7977/resource/d2f6e3e4-8abf-48ef-a0da-8e5669324588/download/derechosconcedidos.xlsx
+    formato: XLSX
+    tamano: 54 MB (~152 mil filas)
+    cobertura_espacial: nacional; región, provincia y comuna
+    contenido: tipo de derecho, naturaleza del agua (superficial/subterránea), fuente, uso del agua, caudal, ubicación
+    clave_union: comuna (nombre; requiere normalizar a CUT)
+    acceso: descarga
+    licencia: cc-by
+    prioridad: media
+    estado: verificado
+    verificado_el: 2026-10-14
+
+  - id: minsal_defunciones_semanales
+    nombre: Defunciones por semana epidemiológica, sexo, grupo de edad y región
+    institucion: Ministerio de Salud (DEIS)
+    componente: [vulnerabilidad, impacto]
+    url: https://datos.gob.cl/dataset/1c2811cd-13a4-4406-b20d-cda1544b65d0/resource/90d092cc-bf19-4bcc-bfb0-22b0c5db6707/download/def_semana_epidemiologica.csv
+    formato: CSV (separador |)
+    tamano: 6 MB
+    cobertura_espacial: 16 regiones (no comunal)
+    cobertura_temporal: 2010-2026, semanal
+    contenido: muertes observadas y población por grupo de edad (0-14, 15-39, 40-64, 65-79, 80+) y sexo
+    clave_union: región (nombre; requiere normalizar a código)
+    acceso: descarga
+    licencia: cc-zero
+    prioridad: alta
+    estado: verificado
+    verificado_el: 2026-10-14
+    notas: "Base para la curva temperatura-mortalidad regional (dlnm/climatehealth). Para el nivel comunal, ver DEIS (bloqueado)."
+
+  - id: arclim_amenazas_comunales
+    nombre: ARClim — indicadores de amenaza climática por comuna
+    institucion: MMA (ARClim)
+    componente: [amenaza]
+    url: https://arclim.mma.gob.cl/media//FeatureSets/comunas//clima/amenazas_comunas_annual.geojson
+    formato: GeoJSON
+    tamano: 3,9 MB
+    cobertura_espacial: 345 comunas
+    contenido: 59 indicadores (presente, futuro, delta)
+    clave_union: CUT (arclim_id)
+    acceso: descarga
+    licencia: no_verificado
+    prioridad: alta
+    estado: verificado
+    verificado_el: 2026-10-14
+    notas: "Escenario y períodos de esta versión por confirmar. Ver docs/revision_github.md."
+
+  - id: siss_cuadros_datosgob
+    nombre: SISS — cuadros del Informe de Gestión del Sector Sanitario (publicados en datos.gob.cl)
+    institucion: SISS
+    componente: [exposicion, vulnerabilidad]
+    url: https://datos.gob.cl/organization/superintendencia_de_servicios_sanitarios
+    formato: XLSX (47 cuadros)
+    cobertura_espacial: por empresa sanitaria y región (no comunal)
+    cobertura_temporal: "datos publicados en 2019 (no actualizados desde entonces)"
+    contenido: clientes, consumo, dotación, cobertura de agua potable, alcantarillado y tratamiento, calidad, continuidad
+    clave_union: empresa / región
+    acceso: descarga
+    licencia: cc-by
+    prioridad: baja
+    estado: verificado
+    verificado_el: 2026-10-14
+    notas: "Algunos archivos responden con error 502 de forma intermitente. Desactualizado: preferir el sitio de SISS desde el laptop."
+
+  - id: siss_sitio
+    nombre: SISS — informes de gestión y estadísticas recientes
+    institucion: SISS
+    componente: [exposicion, vulnerabilidad]
+    url: https://www.siss.gob.cl
+    acceso: laptop
+    licencia: no_verificado
+    prioridad: alta
+    estado: bloqueado_nube
+    verificado_el: 2026-10-14
+    notas: "El sitio corta la conexión desde la nube (probable restricción geográfica). Descargar desde el laptop."
+
+  - id: deis_repositorio
+    nombre: DEIS — repositorio de datos abiertos (defunciones con comuna y causa)
+    institucion: Ministerio de Salud (DEIS)
+    componente: [impacto]
+    url: https://repositoriodeis.minsal.cl/
+    acceso: laptop
+    licencia: no_verificado
+    prioridad: media
+    estado: bloqueado_nube
+    verificado_el: 2026-10-14
+    notas: "Responde 403 desde la nube. Probar desde el laptop."
+
+  - id: energia_abierta_cne
+    nombre: Energía Abierta (CNE) — estadísticas de electricidad y combustibles
+    institucion: CNE
+    componente: [transicion]
+    url: https://energiaabierta.cl
+    acceso: no_verificado
+    licencia: no_verificado
+    prioridad: media
+    estado: no_verificado
+    verificado_el: 2026-10-14
+    notas: "El sitio responde, pero api.energiaabierta.cl está bloqueado desde la nube y no se identificaron descargas por comuna."

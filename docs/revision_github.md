@@ -93,9 +93,65 @@ Abreviaturas: Py = Python · R = R.
 
 **Descartados:** Oasis, r2dii, ESMValTool e icclim, por estar orientados a carteras o seguros, o por ser redundantes o excesivos para el hardware disponible.
 
+## Segunda ronda: búsqueda desde el laptop (2026-10-14)
+
+`make buscar-repos` ejecutó 20 búsquedas y devolvió **245 repositorios únicos**
+(`catalog/repos_github.csv`). La mayoría no sirve: apps del tiempo, tareas de cursos y homónimos
+de "ARClim". Se revisaron a fondo 20, clonándolos para ver la licencia, la fecha y el contenido.
+
+**Importante sobre licencias:** un repositorio **sin licencia** no es de uso libre. Por defecto, su
+autor conserva todos los derechos: se puede leer y aprender de él, pero no copiar su código. Sí se
+pueden usar los **hechos** que documenta (por ejemplo, la dirección de un archivo público).
+
+### Hallazgo principal: los indicadores comunales de ARClim se descargan directamente
+
+El repositorio [Sud-Austral/DATA_ARCLIM](https://github.com/Sud-Austral/DATA_ARCLIM) (sin licencia)
+muestra que ARClim publica un GeoJSON con las amenazas climáticas comunales en:
+
+`https://arclim.mma.gob.cl/media//FeatureSets/comunas//clima/amenazas_comunas_annual.geojson`
+
+Se descargó y revisó el 2026-10-14 **[V]**:
+- **345 comunas** (polígonos), 3,9 MB;
+- la clave `arclim_id` es el **CUT vigente**: 1401 = Pozo Almonte, y Ñuble aparece como región 16;
+- **59 indicadores**, cada uno en tres versiones (`_present`, `_future`, `_delta`), entre ellos:
+  - **calor:** `hot_days`, `summer_days`, `tropical_nights`, `hottest_day`,
+    `warm_spell_duration_index_*`, `warm_nights_duration_index_*`;
+  - **sequía:** `drought_periods`, `consecutive_dry_days`, `pr_sum`, `eto_mean`;
+  - **precipitación extrema:** `maximum_daily_precipitation`, `number_of_heavy_precipitation_days`,
+    `number_of_very_heavy_precipitation_days`, `total_from_extremely_wet_days`;
+  - **otros:** frío, heladas, nieve, viento, humedad y radiación.
+
+**Por verificar [NV]:** qué escenario y qué períodos definen "present" y "future" en esta versión
+(algunos archivos de terceros mencionan `ssp585`, lo que sugiere CMIP6), las 346 comunas oficiales
+frente a las 345 del archivo, y los términos de uso de los datos.
+
+Con esto, la **Ruta A** de la metodología (indicadores ARClim comunales) es viable de inmediato
+para la cadena calor-salud.
+
+### Repositorios relevantes de la segunda ronda
+
+| Repositorio | Leng. | Licencia | Último commit | Qué aporta | Veredicto |
+|---|---|---|---|---|---|
+| [bastianolea/territorial](https://github.com/bastianolea/territorial) | R | GPL-3.0 | 2026-10-08 | Limpieza de nombres de comunas, **actualización de CUT antiguos** (incluido el cambio por Ñuble) y macrozonas | **Reutilizar** (dependencia) para la tabla territorial |
+| [bastianolea/poblador](https://github.com/bastianolea/poblador) | R | GPL-3.0 | 2026-08-12 | Población oficial: Censo 2017, Censo 2024, proyecciones y **pobreza comunal MIDESO** (ingresos y multidimensional) | **Reutilizar** para exposición y vulnerabilidad; contrastar con las fuentes oficiales |
+| [pachadotdev/casen](https://github.com/pachadotdev/casen) | R | Apache-2.0 | 2022-06-21 | CASEN con diseño muestral complejo | Referencia (sin actividad reciente) |
+| [fabiancarrilloh/casenHarmoniza](https://github.com/fabiancarrilloh/casenHarmoniza) | R | MIT | 2026-05-15 | Armonización de variables CASEN 2017, 2022 y 2024, con diccionarios y cifras de control | **Adaptar** |
+| [klak1996/Download_data_cr2met](https://github.com/klak1996/Download_data_cr2met) | Py | MIT | 2025-09-17 | Descarga masiva de CR2MET v2.5_R1 | **Adaptar** para el conector CR2MET |
+| [pachadotdev/censo2024-duckdb](https://github.com/pachadotdev/censo2024-duckdb) | R | sin licencia | 2025-12-06 | Censo 2024 en DuckDB, con correcciones | Referencia; pedir licencia al autor o hacer conector propio |
+| [bastianolea/censo_2024](https://github.com/bastianolea/censo_2024) | R | sin licencia | 2025-07-27 | Tablas del Censo 2024 (edad, servicios básicos, discapacidad) | Referencia: muestra qué tabulados publica el INE |
+| [zeliest/lancet_countdown_heatwave_2024](https://github.com/zeliest/lancet_countdown_heatwave_2024) | Py | sin licencia | 2024-09-03 | Indicador de **exposición de población a olas de calor** del Lancet Countdown (ERA5 + WorldPop/GPW) | **Referencia metodológica** clave para la cadena calor-salud |
+| [maximilianstarp/EnergyPoverty](https://github.com/maximilianstarp/EnergyPoverty) | Py | MIT | 2026-03-12 | Simulación del efecto de precios de energía y políticas en la pobreza energética de hogares | **Adaptar** para el canal de costo energético de la transición |
+| [MeldaS/FloodPop](https://github.com/MeldaS/FloodPop) | Py | MIT | 2021-06-02 | Población expuesta a inundación (global) | Referencia para la fase 2 |
+| [GFDRR/rdl-standard](https://github.com/GFDRR/rdl-standard) | — | CC BY-SA 4.0 | 2026-07-13 | Estándar de metadatos para datos de riesgo | Referencia para el esquema de `catalog/` |
+| [knxroot/bdcut-cl](https://github.com/knxroot/bdcut-cl) | SQL | sin licencia | 2020-08-25 | Códigos CUT de regiones, provincias y comunas | Descartar (desactualizado; usar `territorial` y la fuente oficial) |
+
+Descartados en esta ronda: visualizadores temáticos (delincuencia, corrupción, elecciones), apps
+del tiempo, proyectos de curso, modelos corporativos o de seguros con escenarios NGFS, y
+repositorios homónimos de ARClim sin relación.
+
 ## Vacíos
 
-- **No se encontró código abierto de ARClim ni del CR2** en GitHub. CR2 publica sus datos en el
+- **ARClim no tiene código abierto oficial**, pero sus indicadores comunales se descargan directamente (ver arriba). Del CR2 no hay código oficial. CR2 publica sus datos en el
   portal [DataClima](https://www.cr2.cl/eng/cr2-launches-dataclima-a-repository-of-platforms-and-databases-on-climate-conditions-in-chile/),
   y el paquete R `hydrotoolbox` lee los CSV del Explorador Climático del CR2
   ([viñeta](https://cran.csail.mit.edu/web/packages/hydrotoolbox/vignettes/cr2_cl.html)). Hay que

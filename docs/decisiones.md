@@ -154,6 +154,21 @@ fuente y estado de verificación. La primera cadena a implementar es calor y sal
 
 ---
 
+## D-010 · El proyecto funciona con Claude y sin Claude
+
+**Contexto.** Axel debe poder mantener el proyecto solo, sin sesiones de Claude.
+
+**Decisión.** Mientras haya suscripción, Claude trabaja en ramas `claude/...` y entrega PR que
+Axel mezcla; sin suscripción, nada cambia salvo que dejan de llegar PR. Axel trabaja siempre
+en `main`. Lo que construya Claude queda como comandos `make` ejecutables sin él. La conexión a Drive usa la app OAuth propia (publicada), que no caduca
+mientras se use al menos cada 6 meses. Una revisión automática en GitHub Actions
+(`.github/workflows/check.yml`) corre `make check` en cada push, sin acceso a Drive ni claves.
+
+**Consecuencias.** `docs/manual_autonomo.md` reúne git, Drive, reinstalación, nuevas fuentes y
+diagnóstico. Las guías ya no remiten a Claude para resolver problemas.
+
+---
+
 ## Pendientes (se decidirán más adelante)
 
 - Caso piloto: A) calor extremo y población mayor (recomendado), B) estrés hídrico
