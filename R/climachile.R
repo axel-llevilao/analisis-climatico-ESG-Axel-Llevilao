@@ -50,9 +50,16 @@ cc_ruta <- function(ruta) {
   file.path(cc_data_dir(), ruta)
 }
 
+# TRUE si renv está desactivado en este equipo (p. ej., Steam Deck, ver docs/setup_steamdeck.md).
+cc_sin_renv <- function() {
+  tolower(Sys.getenv("RENV_CONFIG_AUTOLOADER_ENABLED", unset = "true")) %in% c("false", "f", "0")
+}
+
 # Activa la librería renv del proyecto si la sesión de R no la está usando
 # (p. ej., cuando Positron tiene abierta otra carpeta y se usó setwd()).
+# No hace nada en equipos donde renv está desactivado.
 cc_activar_renv <- function(raiz = cc_raiz()) {
+  if (cc_sin_renv()) return(invisible(raiz))
   activo <- Sys.getenv("RENV_PROJECT", unset = "")
   if (file.exists(file.path(raiz, "renv", "activate.R")) &&
       !identical(normalizePath(activo, mustWork = FALSE), normalizePath(raiz)) &&
@@ -65,6 +72,10 @@ cc_activar_renv <- function(raiz = cc_raiz()) {
 cc_conectar <- function(memoria_max = "6GB") {
   cc_activar_renv()
   if (!requireNamespace("duckdb", quietly = TRUE)) {
+    if (cc_sin_renv()) {
+      stop("Falta el paquete duckdb. Instálalo con `micromamba install -n r r-duckdb` ",
+           "(ver docs/setup_steamdeck.md).")
+    }
     stop("Falta el paquete duckdb. Ejecuta `make setup-r` (instala con renv).")
   }
   tmp <- file.path(cc_data_dir(), ".duckdb_tmp")

@@ -45,6 +45,16 @@ Desactivar renv **solo en la Deck** (no toca el repo):
 echo 'RENV_CONFIG_AUTOLOADER_ENABLED=FALSE' >> ~/.Renviron
 ```
 
+En la Deck, la consola de R de **Positron no tomó esa variable**, así que el acceso directo de
+Positron (`~/.local/share/applications/positron.desktop`) también la exporta:
+
+```
+Exec=env RENV_CONFIG_AUTOLOADER_ENABLED=FALSE PATH=/home/deck/micromamba/envs/r/bin:/home/deck/.local/bin:/usr/bin:/bin /home/deck/.local/opt/positron/usr/share/positron/positron --no-sandbox %F
+```
+
+Si al abrir R en Positron aparece *"One or more packages recorded in the lockfile are not
+installed"*, renv se activó: revisa esa línea y abre Positron desde el menú, no desde la terminal.
+
 Con renv desactivado, R carga `~/.Rprofile`. Ahí deben fijarse las rutas de datos que necesitan
 `sf`, `terra` y `units`, porque Positron abre R sin activar el entorno de micromamba:
 
@@ -120,6 +130,7 @@ Para Python, elegir **.venv** en el selector de intérpretes.
 |---|---|
 | `✗ herramienta: R: no encontrada` | Sección 1 (accesos `R` y `Rscript` en `~/.local/bin`) |
 | `there is no package called ...` | `micromamba install -n r r-<paquete>` |
+| En Positron: *"Falta el paquete duckdb. Ejecuta make setup-r"* | renv se activó: sección 2, acceso directo de Positron |
 | `sf`/`terra` avisan que no encuentran `proj.db` | Revisar el `~/.Rprofile` de la sección 2 |
 | `.venv` roto tras actualizar SteamOS | Sección 3 |
 | `Permission denied` al correr un comando de `~/.local/bin` | `chmod +x ~/.local/bin/<comando>` |
